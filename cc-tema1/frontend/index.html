@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
+    <title>Document</title>
+    <style>
+        :root {
+            --background: #222a54;
+            --background-on-surface: #6bbfe7;
+            --primary: #cc0039;
+            --accent: white;
+            --on-surface: #6c112a;
+            --on-surface-variant: #ff7ca0;
+            --shadow: #1c1c1c;
+            --white: #fff;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            padding-top: 120px;
+            background: var(--background);
+            box-sizing: border-box;
+        }
+
+        .container .button {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 240px;
+            height: 60px;
+            background: var(--primary);
+            border: none;
+            border-radius: 40px;
+            outline: none;
+            overflow: hidden;
+            transition: .2s;
+        }
+
+        .container .button::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 100px;
+            top: -20px;
+            left: -40px;
+            background: var(--accent);
+            transform: rotate(40deg);
+            transition: .4s;
+        }
+
+        .container .button:hover {
+            margin-top: -3px;
+            margin-bottom: 3px;
+            box-shadow: 0 3px 2px var(--shadow);
+            cursor: pointer;
+        }
+
+        .container .button:hover::before {
+            left: 110%;
+        }
+
+        .container .button:active {
+            margin-top: 0;
+            margin-bottom: 0;
+            box-shadow: none;
+            transition: 0s;
+        }
+
+        .container .button:active span {
+            color: var(--on-surface-variant);
+        }
+
+        .container .button span {
+            color: var(--on-surface);
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 3px;
+            user-select: none;
+            transition: .08s;
+        }
+
+        .loader {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            top: 2rem;
+            animation: spin .8s linear infinite;
+            border: 4px solid transparent;
+            border-radius: 50%;
+            border-top: 4px solid var(--background-on-surface);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 600px;
+            margin-top: 4rem;
+            color: var(--background-on-surface);
+            font-family: sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .main tr {
+            display: flex;
+            margin-top: .5rem;
+        }
+
+        .main tr:first-child {
+            font-weight: bold;
+        }
+
+        .main tr td {
+            flex: 1;
+        }
+
+        .main td:first-child {
+            margin-right: .5rem;
+            text-align: right;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="loader hidden"></div>
+
+        <button class="button" onclick="buttonClick()"><span>PRESS ME</span></button>
+
+        <main class="main">
+            <table class="info">
+                <tr>
+                    <td>IP:</td>
+                    <td id="info-ip">-</td>
+                </tr>
+                <tr>
+                    <td>Continent:</td>
+                    <td id="info-continent">-</td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td id="info-country">-</td>
+                </tr>
+                <tr>
+                    <td>Region:</td>
+                    <td id="info-region">-</td>
+                </tr>
+                <tr>
+                    <td>Local time:</td>
+                    <td id="info-time">-</td>
+                </tr>
+            </table>
+        </main>
+    </div>
+
+</body>
+
+</html>

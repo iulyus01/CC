@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            max-width: 200px;
+            padding: 5px 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="container">
+        <tr>
+            <th>Timestamp</th>
+            <th>Method</th>
+            <th>URL</th>
+            <th>Response</th>
+            <th>Delay</th>
+        </tr>
+    </table>
+
+    <script>
+        var container;
+        async function fetchMetrics() {
+            const url = 'http://127.0.0.1:8127/metrics';
+            let response = await fetch(url).then(response => response.json());
+
+            console.log(response);
+
+            for(let i = 0; i < response.length; i++) {
+                let row = '<tr>';
+                row += `<td>${response[i].timestamp}</td>`;
+                row += `<td>${response[i].method}</td>`;
+                row += `<td>${response[i].url}</td>`;
+                row += `<td>${response[i].responseText}</td>`;
+                row += `<td>${response[i].delay} ms</td>`;
+                row += '</tr>'
+                container.innerHTML += row;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            container = document.querySelector('.container');
+            fetchMetrics();
+        });
+    </script>
+</body>
+
+</html>
